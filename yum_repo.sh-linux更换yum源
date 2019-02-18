@@ -1,6 +1,7 @@
 #!/bin/bash
 #change yum source
 #name=yum_repo.sh
+#更换centos7 的yum源，如更换yum服务器的地址为172.31.101.100
 
 echo "========start============="
 cd /etc/yum.repos.d/
