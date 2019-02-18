@@ -1,4 +1,4 @@
-/bin/bash
+#/bin/bash
 #identity user is a superuser
 #script_mane=ops-allinone-nodemo-custnetwork-v3.sh
 #使用packstack工具部署allinone环境的opentstack,版本为queen
