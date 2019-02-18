@@ -1,5 +1,6 @@
 #!bin/bash
 #主机信息每日巡检
+#将巡检结果保存/var/log/HostDailyCheck/路径下，格式为txt,文件名为日期+IP地址，例如HostDailyCheck-172.31.101.46-20190218.txt
 
 IPADDR=$(ifconfig eth0 | grep '\<inet\>' | awk '{print $2}')
 #环境变量PATH没设好，在cron里执行时有很多命令会找不到
