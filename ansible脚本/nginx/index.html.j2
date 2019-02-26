@@ -1,0 +1,12 @@
+#nginx服务器的index.html首页
+#路径为/root/playbook/test_ansible/index.html.j2
+<html>
+  <head>
+     <title>Welcome to ansible</title>
+  </head>
+  <body>
+  <h1>ngix, configred by Ansible</h1>
+  <p>If you can see this, Ansible successfully installed nginx.</p>
+  <p>{{ ansible_hostname }}</p>
+  </body>
+</html>
