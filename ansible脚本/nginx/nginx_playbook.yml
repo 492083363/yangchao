@@ -1,0 +1,26 @@
+#nginx的yaml
+---
+- hosts: ansible-test
+  become: yes
+  become_method: sudo
+  vars: 
+    worker_processes: 4
+    worker_connections: 768
+    max_open_files: 65506
+  tasks:
+    - name : install nginx
+      yum : name=nginx
+    - name : copy nginx config flie 
+      template: src=/root/playbook/test_ansible/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+      notify : restart nginx
+    
+    - name : copy index.html
+      template:
+        src: /root/playbook/test_ansible/index.html.j2
+        dest: /usr/share/nginx/html/index.html
+        mode: 0644
+      notify : restart nginx
+         
+  handlers:
+    - name : restart nginx
+      service: name=nginx state=restarted
