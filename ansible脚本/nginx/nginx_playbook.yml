@@ -1,4 +1,4 @@
-#nginx的yaml
+#nginx的yaml，通过centos7安装nginx服务器
 ---
 - hosts: ansible-test
   become: yes
