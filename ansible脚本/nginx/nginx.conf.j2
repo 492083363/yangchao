@@ -1,0 +1,26 @@
+#nginx的配置文件，injia2模板
+#路径为/root/playbook/test_ansible/nginx.conf.j2
+
+worker_processes {{ worker_processes }};
+worker_rlimit_nofile {{ max_open_files }};
+
+events {
+    worker_connections {{ worker_connections }};
+}
+
+http {
+    server {
+            listen 80 default_server;
+            listen [::]:80 default_server ipv6only=on;
+
+            listen 443 ssl;
+
+            root /usr/share/nginx/www;
+            index index.html index.html;
+            server_name localhost;
+
+            location / {
+                    try_files $uri $uri/ =404;
+            }
+      }
+}
