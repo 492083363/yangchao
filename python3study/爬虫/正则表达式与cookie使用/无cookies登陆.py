@@ -5,8 +5,8 @@ import urllib.parse
 #登陆chinaunix论坛
 url="http://account.chinaunix.net/login/login"   #博客登陆首页对应POST方法的
 postdata=urllib.parse.urlencode({
-    "username":"yangchao1987",
-    "password":"Yc87841201"
+    "username":"xxxxxx",
+    "password":"xxxxxxx"
 }).encode('utf-8')                #使用urlencode编码处理后，再设置为utf-8编码
 req=urllib.request.Request(url,postdata) #构建Request对象
 req.add_header('User-Agent','Mozilla/5.0(Windows NT 6.1; WOW 64) AppleWebKit /537.36(KHTML,like Gecko) '
