@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 #coding:utf-8
 #使用ip138查找ip地址归属地
 import urllib
