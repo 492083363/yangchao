@@ -24,7 +24,7 @@ def craw(url,page):
     imagelist=re.compile(pat2).findall(result2)
     x=1
     for imageurl in imagelist:
-        imagename="E:/pacong/part6/img1/"+str(page)+str(x)+".jpg"
+        imagename="/home/yangchao/桌面/桌面/pacong/part6/img1/"+str(page)+str(x)+".jpg"
         imageurl="http://"+imageurl
         try:
             urllib.request.urlretrieve(imageurl,filename=imagename)
