@@ -1,0 +1,47 @@
+version: '3'
+services:
+  # docker run --name some-zabbix-server-mysql -e DB_SERVER_HOST="some-mysql-server" -e MYSQL_USER="some-user" -e MYSQL_PASSWORD="some-password" -d zabbix/zabbix-server-mysql:tag
+  zabbix-server:
+    image: zabbix/zabbix-server-mysql
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: zabbix
+      DB_SERVER_HOST: 127.0.0.1
+    network_mode: host
+    depends_on:
+      - zabbix-mysql
+
+  #docker run --name some-zabbix-web-nginx-mysql --link some-zabbix-server:zabbix-server -e DB_SERVER_HOST="some-mysql-server" -e MYSQL_USER="some-user" -e MYSQL_PASSWORD="some-password" -e ZBX_SERVER_HOST="some-zabbix-server" -e PHP_TZ="some-timezone" -d zabbix/zabbix-web-nginx-mysql:tag
+  zabbix-web:
+    image: zabbix/zabbix-web-nginx-mysql
+    environment:
+      DB_SERVER_HOST: 127.0.0.1
+      MYSQL_USER: root
+      MYSQL_PASSWORD: zabbix
+      ZBX_SERVER_HOST: 127.0.0.1
+    network_mode: host
+    depends_on:
+      - zabbix-mysql
+
+  zabbix-mysql:
+    image: mysql:5.7
+    container_name: zabbix-mysql
+    command: --character-set-server=utf8 --socket=/var/lib/mysql/mysqld.sock
+    environment:
+      MYSQL_ROOT_PASSWORD: zabbix
+      MYSQL_DATABASE: zabbix
+      MYSQL_USER: zabbix
+      MYSQL_PASSWORD: zabbix
+    volumes:
+      - "/data2:/var/lib/mysql"
+    network_mode: host
+
+  # docker run --name some-zabbix-agent -e ZBX_HOSTNAME="some-hostname" -e ZBX_SERVER_HOST="some-zabbix-server" -d zabbix/zabbix-agent:tag
+  #
+  zabbix-agent:
+    image: zabbix/zabbix-agent
+    environment:
+      ZBX_HOSTNAME: test
+      ZBX_SERVER_HOST: 127.0.0.1
+    network_mode: host
+
