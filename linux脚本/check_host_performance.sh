@@ -48,7 +48,7 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 echo 
 echo "网络监听情况"
 echo "----------------------------------"
-netstat -tnpl | awk 'NR&gt;2 {printf "%-20s %-15s \n",$4,$7}'
+netstat -tnpl | awk 'NR>2 {printf "%-20s %-15s \n",$4,$7}'
 echo 
 echo "内存资源占用Top 10"
 echo "----------------------------------"
