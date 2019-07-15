@@ -1,0 +1,9 @@
+---
+#test yaml
+- hosts: websrvs
+  remote_user: root
+
+  tasks:
+    - name: hello
+      command: hostname
+       
