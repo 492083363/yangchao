@@ -1,6 +1,6 @@
 ---
 #test yaml
-- hosts: websrvs
+- hosts: webservers
   remote_user: root
 
   tasks:

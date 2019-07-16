@@ -1,0 +1,17 @@
+#create new file
+---
+- hosts: webservers
+  remote_user: root
+  
+  tasks:
+    - name: create new file
+      file: name=/root/newfile state=touch
+    - name: create new user
+      user: name=yangchao system=yes shell=/sbin/nologin
+    - name: install package
+      yum: name=httpd
+    - name: copy conf
+      copy : src=/var/www/html/index.html dest=/var/www/html/
+    - name: start service
+      service: name=httpd state=started enabled=yes
+
