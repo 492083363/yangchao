@@ -1,0 +1,13 @@
+---
+- hosts: webservers
+  remote_user: root
+
+  tasks:
+    - name: install package
+      yum: name={{ pkgname }}
+    - name: install package_new
+      yum: name={{ pkgname_new }}
+    - name: install more package
+      yum: name ={{ pkgname_vim }},{{ pkgname_tree }}
+    - name: start service
+      service: name={{ pkgname }}  state=started enabled=yes

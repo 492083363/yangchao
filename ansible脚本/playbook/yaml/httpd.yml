@@ -1,0 +1,19 @@
+---
+- hosts: webservers
+  remote_user: root
+
+  tasks:
+    - name: install httpd package
+      yum: name=httpd
+      tags: installhttpd
+    - name: copy conf file
+      copy: src=/etc/httpd/conf/httpd.conf dest=/etc/httpd/conf/ backup=yes
+      notify: restart service
+    - name: start servie
+      service: name=httpd state=started enabled=yes
+      tags: restathttpd
+      
+  handlers:
+    - name: restart service
+      service: name=httpd state=restarted
+

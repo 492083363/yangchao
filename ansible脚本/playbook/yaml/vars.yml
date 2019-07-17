@@ -1,0 +1,12 @@
+---
+- hosts: webservers
+  remote_user: root
+  vars:
+    - pkgname_vim: vim
+    - pkgname_tree: tree
+
+  tasks:
+    - name: install more package
+      yum: name={{ pkgname_vim }}
+      yum: name={{ pkgname_tree }}
+    
