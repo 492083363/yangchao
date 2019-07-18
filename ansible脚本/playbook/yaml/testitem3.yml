@@ -1,0 +1,19 @@
+#使用嵌套循环创建组，并在各自组中创建用户
+---
+- hosts: webservers
+  remote_user: root
+  tasks:
+    - name: create some groups
+      group: name={{ item }}  #特殊变量，循环专用
+      when:  ansible_distribution_major_version == "7"   #根据ansible setup中的此变量判断系统版本是否为centos7
+      with_items:                 #循环创建三个组
+        - g1
+        - g2
+        - g3
+
+    - name: create some users
+      user: name={{ item.name }} group={{ item.group }}    #字典方式嵌套
+      with_items:
+        - { name: 'user1', group: 'g1' }
+        - { name: 'user2', group: 'g2' }
+        - { name: 'user3', group: 'g3' }

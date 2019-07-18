@@ -1,0 +1,13 @@
+---
+- hosts: webservers
+  remote_user: root
+
+  tasks:
+    - name: create some groups
+      group: name={{ item }}
+      when: ansible_distribution_major_version == "7"
+      with_items:
+        - g1
+        - g2
+        - g3
+

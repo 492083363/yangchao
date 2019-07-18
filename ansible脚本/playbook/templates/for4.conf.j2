@@ -1,0 +1,9 @@
+{% for port in ports %}
+server{
+            listen {{ port.port }}
+{% if port.name is defined %}
+            servername {{ port.name }}
+{% endif %}
+            documentroot {{ port.rootdir }}
+}
+{% endfor %}

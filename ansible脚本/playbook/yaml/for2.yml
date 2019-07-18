@@ -1,0 +1,13 @@
+#测试for循环,字典的方式实现
+---
+- hosts: webservers
+  remote_user: root
+  vars:
+    ports:
+      - listen_port: 81
+      - listen_port: 82
+      - listen_port: 83
+  
+  tasks:
+    - name: copy conf
+      template: src=/home/yangchao/桌面/yangchao/ansible脚本/playbook/templates/for2.conf.j2 dest=/data/for2.conf

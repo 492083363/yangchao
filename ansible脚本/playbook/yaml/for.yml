@@ -1,0 +1,14 @@
+#测试for循环
+---
+- hosts: webservers
+  remote_user: root
+  vars:
+    ports:
+      - 81
+      - 82
+      - 83
+  
+  tasks:
+    - name: copy conf
+      template: src=/home/yangchao/桌面/yangchao/ansible脚本/playbook/templates/for1.conf.j2 dest=/data/for1.conf
+
