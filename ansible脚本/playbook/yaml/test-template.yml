@@ -1,0 +1,26 @@
+---
+- hosts: webservers
+  remote_user: root
+  vars:
+    - http_port: 9090
+
+  tasks:
+    - name: install repolist
+      yum: name=epel-release
+    - name: install package
+      yum: name=nginx
+    - name: cpoy template for centos7
+      template: src=/home/yangchao/桌面/yangchao/ansible脚本/playbook/templates/nginx.conf7.j2 dest=/etc/nginx/nginx.conf
+      when: ansible_distribution_major_version == "7"
+      notify: restart service
+    - name: copy template for centos6
+      template: src=/home/yangchao/桌面/yangchao/ansible脚本/playbook/templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+      when: ansible_distribution_major_version == "6"
+    - name: start service
+      service: name=nginx state=started enabled=yes
+
+  handlers:
+    - name: restart service
+      service: name=nginx state=restarted
+  
+
