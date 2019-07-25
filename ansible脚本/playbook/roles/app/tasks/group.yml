@@ -1,0 +1,3 @@
+- name: create group
+  group: name=app system=yes  gid=123
+  

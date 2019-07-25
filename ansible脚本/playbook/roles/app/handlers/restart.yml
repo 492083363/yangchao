@@ -1,0 +1,2 @@
+- nmae: restart service
+  servie: name=httpd state=restarted
