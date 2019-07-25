@@ -1,0 +1,4 @@
+#创建apache用户
+- name: create httpd user apache
+  user: name=apache system=yes shell=/sbin/nologin
+  
