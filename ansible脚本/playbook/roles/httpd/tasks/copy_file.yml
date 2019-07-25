@@ -1,3 +1,2 @@
 - name: copy file
-  copy: src=httpd.conf dest=/data/ owner=apache
-  
+  copy: src=httpd.conf dest=/etc/httpd/ owner=apache

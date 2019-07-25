@@ -1,0 +1,8 @@
+#调用角色的文件需要与role路径平及
+---
+  - hosts: webservers
+    remote_user: root
+    roles:
+      - role: httpd
+      - role: nginx
+
