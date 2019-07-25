@@ -1,0 +1,5 @@
+#创建用户组nginx
+- name: create group
+  group: name=nginx gid=80 
+
+

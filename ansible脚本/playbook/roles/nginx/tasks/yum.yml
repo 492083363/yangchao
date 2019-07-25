@@ -1,0 +1,3 @@
+#yum安装软件nginx
+- name: install package
+  yum: name=nginx 

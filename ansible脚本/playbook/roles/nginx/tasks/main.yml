@@ -1,0 +1,7 @@
+#定义任务执行先后顺序
+- include: group.yml
+- include: user.yml
+- include: yum.yml
+- include: template.yml
+- include: start_service.yml
+- include: restart_service.yml

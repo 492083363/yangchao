@@ -1,0 +1,4 @@
+#创建用户user
+- name: create user
+  user: name=ngiinx  uid=80 group=nginx system=yes shell=/sbin/nologin
+

@@ -1,0 +1,4 @@
+#重起nginx服务
+- name: restart serivce
+  service: name=nginx state=restarted
+  

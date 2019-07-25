@@ -1,0 +1,4 @@
+#定义nginx配置文件模板
+- name: copy conf
+  template: src=nginx.conf.j2 dest=/etc/nginx/nginx.conf
+  
