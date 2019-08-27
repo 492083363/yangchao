@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title-form</title>
+    </head>
+    <body>
+        <form method="POST">
+            <lable>username:</lable><input type="text" name="username"><br>
+            <label>password:</label><input type="password" name="password"><br>
+            <lable>confirm_password:</lable><input type="password" name="confirm_password"><br>
+            <input type="submit" value="submit"><br>
+             {#使用编历获取模板中flash的消息#}
+             {% for message in get_flashed_messages() %}
+                {{ message }}
+             {% endfor %}
+        </form>
+        <hr>
+        <form method="POST">
+            {{ form.username.label }}{{ form.username }} <br>
+            {{ form.password.label }}{{ form.password }} <br>
+            {{ form.confirm_password.label }}{{ form.confirm_password }} <br>
+            {{ form.submit }} <br>
+        </form>
+    </body>
+</html>

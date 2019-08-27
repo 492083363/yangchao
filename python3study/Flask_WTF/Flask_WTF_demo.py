@@ -1,7 +1,28 @@
 # coding=utf-8
-from flask import Flask, render_template, request
-app = Flask(__name__)
+from flask import Flask, render_template, request, flash
+from flask_wtf import FlaskForm
+from wtforms import  StringField, PasswordField,SubmitField
 
+
+# 给模板传递消息
+# flash 需要对内容加密，因此需要设置secert_key,作加密消息的混淆
+# 模板中需要遍历消息
+app = Flask(__name__)
+app.secret_key = 'yangchao'
+
+#使用WTF实现表单类
+#自定义表单类
+
+class LoginForm(FlaskForm):
+    username=StringField('username')
+    password=PasswordField('password')
+    confirm_password=PasswordField('confirm_password')
+    submit=SubmitField('submit')
+
+@app.route('/form',methods=['GET','POST'])
+def login():
+    login_form=LoginForm()
+    return render_template('index2.html',form=login_form)
 
 @app.route('/', methods=['GET', 'POST'])
 # 目的：实现一个简单的登陆逻辑处理
@@ -16,15 +37,17 @@ def index1():
         # 2、获取请求的参数
         username = request.form.get('username')
         password = request.form.get('password')
-        confirm_password = request.form.get('password2')
+        confirm_password = request.form.get('confirm_password')
         print(password)
 
         # 判断参数是否填写，密码是否相同
         if not all([username, password, confirm_password]):
             print('参数不完整')
+            flash(u'参数不完整')
 
         elif password != confirm_password:
             print('密码不一致')
+            flash(u'密码不一致')
         else:
             return 'success'
     return render_template('index1.html')
