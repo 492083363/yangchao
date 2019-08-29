@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>"图书查询系统"</title>
+    </head>
+    <body>
+
+        <hr>
+        {#先遍历作者，然后在作者里面遍历书籍#}
+        <url>
+            {% for author in authors %}
+            <h1><li>{{ author.name }}</li></h1>
+                <url>
+                    {% for book in author.books %}
+                        <li>{{ book.name }}</li>
+                        {% endfor %}
+                </url>
+            {% endfor %}
+        </url>
+
+    </body>
+</html>
