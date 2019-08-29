@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>"图书查询系统"</title>
+    </head>
+    <body>
+        <form method="post">
+            {{ form.csrf_token() }}
+            {{ form.author.label }}{{ form.author }}<br>
+            {{ form.book.label }}{{ form.book }}<br>
+            {{ form.submit }}
+            {# 显示消息闪现的内容 #}
+            {% for messae in get_flashed_messages() %}
+                {{ message }}
+            {% endfor %}
+        </form>
+
+        <hr>
+        {#先遍历作者，然后在作者里面遍历书籍#}
+        <url>
+            {% for author in authors %}
+            <h1><li>{{ author.name }}<a href="{{ url_for("delete_author",author_id=author.id) }}">删除</a></li></h1>
+                <url>
+                    {% for book in author.books %}
+                        <li>{{ book.name }}<a href="{{ url_for("delete_book",book_id=book.id)  }}">删除</a></li>
+                    {% else %}
+                        <li>无</li>
+                    {% endfor %}
+                </url>
+            {% endfor %}
+        </url>
+
+    </body>
+</html>
