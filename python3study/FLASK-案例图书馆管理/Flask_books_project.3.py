@@ -1,5 +1,5 @@
 # coding=utf-8
-from flask import Flask, render_template, flash, request
+from flask import Flask, render_template, flash, request,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -9,7 +9,7 @@ from wtforms.validators import DataRequired
 app = Flask(__name__)
 # 配置数据库的地址
 # 跟踪数据库的修改--->不建议开启，首先消耗性能，其次未来的版本中会删除
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:abc@123@127.0.0.1:3306/flask_books2'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:abc@123@127.0.0.1:3306/flask_books3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'yangchao'
 # 创建数据库对象
@@ -35,6 +35,9 @@ db = SQLAlchemy(app)
 # b.模板中显示
 # c.secret_key/编码/csrf_token
 # 6、实现相关的增删逻辑
+#a.增加书籍
+#b.删除书籍-》网页中删除--》点击需要发送书籍的ID给删除书籍的路由-->路由需要接收参数,redirect重定向路由的使用
+#c.   url_for使用，for else的使用
 
 
 # 定义书和作者模型
@@ -73,6 +76,32 @@ class AuthorForm(FlaskForm):
     book = StringField('书籍', validators=[DataRequired()])
     submit = SubmitField('提交')
 
+@app.route('/delete_book/<book_id>')
+def delete_book(book_id):
+
+    #1查询数据库，是否有该ID的书，如果有就萨何处，没有提示错误
+    book=Book.query.get(book_id)
+
+    #2如果有就删除
+    if book:
+        try:
+            db.session.delete(book)
+            db.session.commit()
+        except Exception as e:
+            print (e)
+            flash('删除书籍出错')
+            db.session.rollback()
+        else:
+            #没有就提示错误
+            flash('书籍找不到')
+    #如何返回当前网址--》重定向
+    #return redirect('www.163.com')
+    #return redirect('/')
+    
+    return redirect(url_for('index'))
+    #redirect重定向，需要传入网址或者根路由
+    #url_for('index'):需要传入视图函数名，返回该视图函数的对应的路由地址
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -106,7 +135,7 @@ def index():
                     new_book = Book(name=book_name, author_id=author.id)
                     db.session.add(new_book)
                     db.session.commit()
-                except Exception as e:
+                except expression as e:
                     print(e)
                     flash('添加书籍失败')
                     db.session.rollback()
@@ -120,7 +149,7 @@ def index():
                 new_book = Book(name=book_name, author_id=new_author.id)
                 db.session.add(new_book)
                 db.session.commit()
-            except Exception as e:
+            except expression as e:
                 print(e)
                 flash('添加作者和书籍失败')
                 db.session.rollback()
@@ -132,7 +161,7 @@ def index():
     # 查询所有的作者信息，让信息传递给模板
     authors = Author.query.all()
     # 传入模板
-    return render_template('books2.html', authors=authors, form=author_form)
+    return render_template('books3.html', authors=authors, form=author_form)
 
 
 if __name__ == '__main__':
