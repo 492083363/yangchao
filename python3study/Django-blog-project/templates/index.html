@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>主页</title>
+    </head>
+    <body>
+        欢迎访问<h1>{{ content }} {{ d }}</h1>
+    <hr>
+    <ul>
+        {% for k,v in d.items %}
+            {% if forloop.counter0|divisibleby:"2" %}
+            <li style="color:#FF0000">{{ forloop.counter0 }} {{ k }} {{ v }}</li>
+            {% else %}
+            <li style="color:#0000ff">{{ forloop.counter0 }} {{ k }} {{ v }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <hr>
+    <ul>
+            {% for k,v in d.items %}
+            <li class='{{ forloop.counter0|divisibleby:"2"|yesno:"odd,even" }}'>
+                {{ forloop.counter0 }} {{ k }} {{ v }}
+            {% endfor %}
+            </li>
+
+    </ul>
+
+    </body>
+</html>
+
+<!--
+.odd {
+    backgroudcolor:red
+}
+.even {
+}
+-->
