@@ -14,50 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
-
-
-from django.http import HttpResponse, HttpRequest, JsonResponse
-
-from django.template import loader ,RequestContext
-
-#模板
-from django.shortcuts import render 
-
-
-def index(request):
-    #视图函数：请求进步返回响应
-    print(request)
-    print(type(request))
-
-    #tp1 = loader.get_template('index.html')
-    #context = RequestContext (request,{'content':'www.yangchao.com'})
-    # return HttpResponset(tp1.render(context))
-    d=dict(zip('abcde',range(1,6)))
-    print (d)
-    #return render(request,'index.html',{'user':'yangchao'}) #html  str
-    #return HttpResponse('hello yangchao')
-    return render(request,'index.html',{'d':d})   #html str
-    
-
-
-def index_jason(request:HttpRequest):
-    #视图函数：请求进步返回响应,使用jason格式
-    #d={'user':'hello yangchao'}
-    #d['method']=request.method
-    #d['path']=request.path
-    #d['path_info']=request.path_info
-    #d['GETparams']=request.GET
-    #return JsonResponse(d) 
-    return JsonResponse({'user':'yangchao'})#jsaon str
-    
+from django.urls import path, re_path ,include
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index', index),
-    path('index_jason',index_jason)
-    #re_path(r'^index/$', index),           正则匹配
-    #re_path(r'^$', index),
+    re_path('user/',include('user.urls'))
+
+
+    #include函数参数写 （应用.路由模块），该函数就会动态导入指定的包的模块，从哦块中读取urlpatterns，返回三元祖
+   #url函数的第二参乎如果不是可调用对象，如果是元组或者列比哦奥，则会从路径出去已匹配的部分，将生于部分与引用的路由模块的urlpatterns进行匹配
+
 
 ]
