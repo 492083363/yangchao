@@ -21,7 +21,7 @@ key_code=urllib.request.quote(keywd)   #使用关键词部分进行编码，编�
 url_all=url+key_code
 req=urllib.request.Request(url_all)
 data=urllib.request.urlopen(req).read()
-fh=open("/home/yangchao/桌面/桌面/pacong/6.html","wb")
+fh=open("/home/yangchao/桌面/pachong/6.html","wb")
 fh.write(data)
 fh.close()
 
